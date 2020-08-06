@@ -1,1 +1,1 @@
-# quantum-languages-review
+# Sample Code for Quantum Programming Languages
