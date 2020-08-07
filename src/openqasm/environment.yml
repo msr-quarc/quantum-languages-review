@@ -1,0 +1,10 @@
+name: openqasm
+prefix: /env
+channels:
+- defaults
+dependencies:
+- python=3.6
+- ipython
+- click # Needed by the run_qasm_program.py script.
+- pip:
+  - qiskit==0.19.6

@@ -1,0 +1,37 @@
+// Prepares a Bell state given two qubits in a computational basis state.
+module PrepareBellPair(qbit left, qbit right) {
+    H(left);
+    CNOT(left, right);
+}
+
+// Implement the adjoint of the sequence of gates added by PrepareBellPair.
+module AdjointPrepareBellPair(qbit left, qbit right) {
+    CNOT(left, right);
+    H(left);
+}
+
+// Teleports the state of the 'msg' qubit to the given 'target' qubit 
+// using the 'helper' qubit as a resource.
+module Teleport(qbit msg, qbit helper, qbit target) {
+    PrepareBellPair(helper, target);
+    AdjointPrepareBellPair(msg, helper);
+    if (MeasZ(msg))  { Z(target); }
+    if (MeasZ(helper)) { X(target); }
+}
+
+int main() {
+    // We will use qubits[0] as the qubit containing the message ('msg'), qubits[1]
+    // as the helper qubit ('helper'), and qubits[2] as the target qubit ('target').
+    // We assume that newly allocated qubits are in the $\ket{0}$ state.
+    qbit qubits[3];
+
+    // We choose to teleport a $\ket{+}$ state.
+    // We initialize the message and teleport it to the target qubit.
+    H(qubits[0]);
+    Teleport(qubits[0], qubits[1], qubits[2]);
+    
+    // We measure the target qubit in $X$ basis to verify if the teleportation worked. 
+    // If the teleportation succeeded, we return 1 and we return -1 otherwise.
+    if (MeasX(qubits[2])) { return 1; } 
+    else { return -1; }
+}

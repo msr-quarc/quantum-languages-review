@@ -1,0 +1,10 @@
+name: cirq
+prefix: /env
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - tk
+  - ipython
+  - pip:
+    - cirq==0.8.1
