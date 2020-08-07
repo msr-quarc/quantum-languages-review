@@ -5,9 +5,9 @@
 To build and run this sample, execute the following commands:
 
 ```
-cd src/openqasm
-docker build -t openqasm .
-docker run -it openqasm
+cd src/qiskit
+docker build -t qiskit .
+docker run -it qiskit
 python run_teleportation.py 
 ```
 
